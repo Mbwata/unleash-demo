@@ -8,26 +8,26 @@ metadata:
 
 release: v1
 image: 
-  repo: nextcloud
+  repo: unleashorg/unleash-server
   tag: latest
   pullpolicy: Always
-imagePullSecrets: regcred
+#imagePullSecrets: regcred
 nodeSelector:
   arch: amd64
-  hostname: anton
+#  hostname: anton
 replicas: 1
 internalport: 80
 externalport: 80
-host: nextcloud.antontheserver.net
+host: unleash.antontheserver.net
 env:
-  name1: POSTGRES_DB
-  value1: ncdb
-  name2: POSTGRES_USER
-  value2: nc
-  name3: POSTGRES_PASSWORD
-  value3: passord
-  name4: POSTGRES_HOST
-  value4: nc-db
+  name1: DATABASE_HOST
+  value1: x
+  name2: DATABASE_NAME
+  value2: unleash
+  name3: DATABASE_USERNAME
+  value3: unleash
+  name4: DATABASE_PASSWORD
+  value4: unleash
 
 volumes:
   volume1:
@@ -35,8 +35,3 @@ volumes:
     mountPath: /var/www/html/
     hostPath: /mnt/nfs_clientshare/nextcloud/ncserver
     type: DirectoryOrCreate
-  volume2: 
-    name: docker-sock
-    mountPath: /var/run/docker.sock
-    hostPath: /var/run/docker.sock
-    type: Socket
