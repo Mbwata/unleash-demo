@@ -50,6 +50,10 @@ spec:
           - name: {{ toYaml .Values.env.name4 }}
             value: {{ toYaml .Values.env.value4 }}
           {{- end }}
+          {{- if .Values.env.name5 }}
+          - name: {{ toYaml .Values.env.name5 }}
+            value: {{ toYaml .Values.env.value5 }}
+          {{- end }}
           {{- end }}
       {{- if .Values.volumes }}         
         volumeMounts:

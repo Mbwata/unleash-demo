@@ -12,12 +12,3 @@ spec:
   selector:
     app: {{ .Values.metadata.appname }}
     release: {{ .Values.release }}
-  {{- if empty .Values.host }}
-  type: LoadBalancer
-  sessionAffinity: None
-  externalTrafficPolicy: Cluster
-status:
-  loadBalancer:
-    ingress:
-      - hostname: localhost
-  {{- end }}

@@ -2,8 +2,8 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 metadata:
-  appname: nextcloud
-  namespace: nextcloud
+  appname: unleash
+  namespace: unleashdemo
 
 
 release: v1
@@ -21,17 +21,12 @@ externalport: 80
 host: unleash.antontheserver.net
 env:
   name1: DATABASE_HOST
-  value1: x
+  value1: unleash-db
   name2: DATABASE_NAME
   value2: unleash
   name3: DATABASE_USERNAME
   value3: unleash
   name4: DATABASE_PASSWORD
   value4: unleash
-
-volumes:
-  volume1:
-    name: ncdata
-    mountPath: /var/www/html/
-    hostPath: /mnt/nfs_clientshare/nextcloud/ncserver
-    type: DirectoryOrCreate
+  name5: DATABASE_SSL
+  value5: "false"
