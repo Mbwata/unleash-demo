@@ -16,7 +16,7 @@ nodeSelector:
   arch: amd64
 #  hostname: anton
 replicas: 1
-internalport: 80
+internalport: 4242
 externalport: 80
 host: unleash.antontheserver.net
 env:

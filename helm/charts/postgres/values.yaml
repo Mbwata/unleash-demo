@@ -9,7 +9,7 @@ metadata:
 release: v1
 image: 
   repo: postgres
-  tag: 9.4.5
+  tag: latest
   pullpolicy: Always
 nodeSelector:
   arch: amd64
@@ -29,5 +29,5 @@ volumes:
   volume1:
     name: pgdata
     mountPath: /var/lib/postgresql/data
-    hostPath: /mnt/nfs_clientshare/unleash/pgdata
+    hostPath: /mnt/nfs_clientshare/unleash2/pgdata
     type: DirectoryOrCreate
