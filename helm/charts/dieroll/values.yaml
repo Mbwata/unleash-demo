@@ -2,41 +2,20 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 metadata:
-  appname: nextcloud
-  namespace: nextcloud
+  appname: dieroll
+  namespace: unleashdemo
 
 
 release: v1
 image: 
-  repo: nextcloud
-  tag: latest
+  repo: housems/unleashdie
+  tag: v1
   pullpolicy: Always
-imagePullSecrets: regcred
+#imagePullSecrets: regcred
 nodeSelector:
-  arch: amd64
-  hostname: anton
+  arch: arm
+#  hostname: anton
 replicas: 1
-internalport: 80
+internalport: 3000
 externalport: 80
-host: nextcloud.antontheserver.net
-env:
-  name1: POSTGRES_DB
-  value1: ncdb
-  name2: POSTGRES_USER
-  value2: nc
-  name3: POSTGRES_PASSWORD
-  value3: passord
-  name4: POSTGRES_HOST
-  value4: nc-db
-
-volumes:
-  volume1:
-    name: ncdata
-    mountPath: /var/www/html/
-    hostPath: /mnt/nfs_clientshare/nextcloud/ncserver
-    type: DirectoryOrCreate
-  volume2: 
-    name: docker-sock
-    mountPath: /var/run/docker.sock
-    hostPath: /var/run/docker.sock
-    type: Socket
+host: dieroll.antontheserver.net
