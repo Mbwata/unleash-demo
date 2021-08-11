@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.metadata.appname }}
+  namespace: {{ .Values.metadata.namespace }}
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.metadata.appname }}
+      release: {{ .Values.release }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.metadata.appname }}
+        release: {{ .Values.release }}
+    spec:
+      {{- if .Values.nodeSelector }}
+      nodeSelector:
+      {{- end }}
+        {{- if .Values.nodeSelector.arch }}
+        kubernetes.io/arch: {{ toYaml .Values.nodeSelector.arch }}
+        {{- end }}
+        {{- if .Values.nodeSelector.hostname }}
+        kubernetes.io/hostname: {{ toYaml .Values.nodeSelector.hostname }}
+        {{- end }}
+      containers:
+      - image: "{{ .Values.image.repo }}:{{ .Values.image.tag }}"
+        {{- if .Values.pullpolicy }}
+        imagePullPolicy: {{ toYaml .Values.image.pullpolicy }}
+        {{- end }}
+        name: {{ .Values.metadata.appname }}
+        ports:
+        - containerPort: {{ .Values.internalport }}
+        {{- if .Values.env }}
+        env:      
+          {{- if .Values.env.name1 }}
+          - name: {{ toYaml .Values.env.name1 }}
+            value: {{ toYaml .Values.env.value1 }}
+          {{- end }}
+          {{- if .Values.env.name2 }}
+          - name: {{ toYaml .Values.env.name2 }}
+            value: {{ toYaml .Values.env.value2 }}
+          {{- end }}
+          {{- if .Values.env.name3 }}
+          - name: {{ toYaml .Values.env.name3 }}
+            value: {{ toYaml .Values.env.value3 }}
+          {{- end }}
+          {{- if .Values.env.name4 }}
+          - name: {{ toYaml .Values.env.name4 }}
+            value: {{ toYaml .Values.env.value4 }}
+          {{- end }}
+          {{- end }}
+      {{- if .Values.volumes }}         
+        volumeMounts:
+         - mountPath: "{{ toYaml .Values.volumes.volume1.mountPath }}"
+           name: {{ toYaml .Values.volumes.volume1.name }}
+        {{- if .Values.volumes.volume2 }}
+         - mountPath: "{{ toYaml .Values.volumes.volume2.mountPath }}"
+           name: {{ toYaml .Values.volumes.volume2.name }} 
+        {{- end }}
+      volumes:
+        - name: {{ toYaml .Values.volumes.volume1.name }}
+        {{- if .Values.volumes.volume1.hostPath }}
+          hostPath:
+            path: {{ toYaml .Values.volumes.volume1.hostPath }}
+            type: {{ toYaml .Values.volumes.volume1.type }}
+         {{- end }}   
+        {{- if .Values.volumes.volume2 }}
+        - name: {{ toYaml .Values.volumes.volume2.name }}
+        {{- if .Values.volumes.volume2.hostPath }}
+          hostPath:
+            path: {{ toYaml .Values.volumes.volume2.hostPath }}
+            type: {{ toYaml .Values.volumes.volume2.type }}
+         {{- end }} 
+        {{- end }}
+      {{- end }}
+      {{- if .Values.imagePullSecrets }}
+      imagePullSecrets:
+        - name: {{ toYaml .Values.imagePullSecrets }}
+      {{- end }}

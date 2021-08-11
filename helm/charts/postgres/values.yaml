@@ -1,0 +1,33 @@
+# Default values for matts jenkins.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+metadata:
+  appname: unleash-db
+  namespace: unleashdemo
+
+
+release: v1
+image: 
+  repo: postgres
+  tag: 9.4.5
+  pullpolicy: Always
+nodeSelector:
+  arch: amd64
+replicas: 1
+internalport: 5432
+externalport: 5432
+#host: nextcloud.antontheserver.net
+env:
+  name1: POSTGRES_DB
+  value1: unleash
+  name2: POSTGRES_USER
+  value2: unleash
+  name3: POSTGRES_PASSWORD
+  value3: unleash
+
+volumes:
+  volume1:
+    name: pgdata
+    mountPath: /var/lib/postgresql/data
+    hostPath: /mnt/nfs_clientshare/unleash/pgdata
+    type: DirectoryOrCreate
