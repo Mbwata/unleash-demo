@@ -7,7 +7,10 @@ port = process.env.PORT || process.argv[2] || 3000;
 // initialize unleash connectivity
 initialize({
   url: process.env.UNLEASH_URL,
-  appName: process.env.UNLEASH_APP
+  appName: process.env.UNLEASH_APP,
+  customHeaders: {
+    Authorization: 'd5da856522fd4b29eaf37e59ea8be9db31cf36de9fd5697030af71c3a9adaa06',
+  },  
 });
 
 app.get('/', (req, res) => res.send('Hello DevOps Bootcamp!'));
