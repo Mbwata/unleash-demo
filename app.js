@@ -13,7 +13,7 @@ initialize({
   },  
 });
 
-app.get('/', (req, res) => res.send('Hello Double Roll'));
+app.get('/', (req, res) => res.send('Hello Single Roll'));
 app.use('/roll', require('./controllers/roll_controller'));
 
 if (module.parent === null) {
